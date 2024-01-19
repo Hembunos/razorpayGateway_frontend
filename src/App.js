@@ -21,7 +21,7 @@ const App = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log('Form Data:', formData);
-    await axios.post('http://localhost:5000/createOrder', formData)
+    await axios.post(`http://localhost:5000/createOrder`, formData)
       .then(res => {
         console.log(res.data);
         handleOpenRazorPay(res.data);
@@ -41,13 +41,13 @@ const App = () => {
       description: "Tutorial of RazorPay",
       order_id: data.id,
       handler: function (response) {
-        axios.post('http://localhost:5000/verifyOrder', {
+        axios.post(`http://localhost:5000/verifyOrder`, {
           response
         })
           .then(res => {
             console.log(res);
             alert("Payment Successfull");
-            return axios.post('http://localhost:5000/sendMail', {
+            return axios.post(`http://localhost:5000/sendMail`, {
               formData,
               
             });
@@ -75,15 +75,10 @@ const App = () => {
  
 
   return (
-
     <>
       <Form handleChange={handleChange} handleSubmit={handleSubmit} formData={formData} />
     
     </>
-
-    
-
-    
   )
 }
 
